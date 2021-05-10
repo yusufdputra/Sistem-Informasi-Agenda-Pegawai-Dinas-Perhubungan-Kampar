@@ -3,7 +3,7 @@
 
 <!-- LOGO -->
 <div class="topbar-left">
-    <a href="{{'/'}}" class="logo"><img src="{{asset('adminto/images/brand/kampar.png')}}" width="30px" alt=""><span>SI<span>AP</span></span><i class="mdi mdi-layers"></i></a>
+    <a href="{{'/'}}" class="logo"><img src="{{asset('adminto/images/brand/kampar.png')}}" width="30px" alt=""><span>Sistem <span>Informasi</span></span><i class="mdi mdi-layers"></i></a>
 </div>
 
 <!-- Button mobile view to collapse sidebar menu -->

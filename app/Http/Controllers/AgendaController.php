@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMailToPegawai;
 use App\Models\Agenda;
 use App\Models\Bidang;
 use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AgendaController extends Controller
 {
@@ -20,7 +22,7 @@ class AgendaController extends Controller
     {
         $title = "Kelola Agenda";
 
-        $agenda = Agenda::all();
+        $agenda = Agenda::with('users');
 
         return view('admin.agenda.index', compact('title', 'agenda'));
     }
@@ -45,6 +47,14 @@ class AgendaController extends Controller
 
     public function store(Request $request)
     {
+          // cek
+          if ($request->file_already != null) {
+            $validator = $request->validate([
+                'tujuan' => 'required',
+            ]);
+
+            
+        }
         // date format
         $date = $request->tanggal;
         $date = Carbon::parse($date)->format('Y-m-d');
@@ -82,7 +92,30 @@ class AgendaController extends Controller
 
         ]);
         if ($query) {
-            return redirect('agenda')->with('success', 'Agenda berhasil ditambah');
+            $detail = [
+                'title' => 'Agenda Baru',
+                'tanggal' => $date,
+                'jam' => $request->jam,
+                'jam2' => $request->jam2,
+                'tempat' => $request->tempat,
+                'keterangan' => $request->keterangan
+            ];
+            // send ke email
+            // jika tujuan per orangan
+            if ($request->jenis_tujuan == 'tujuan_orang') {
+                // get email tujuan pegawai
+                $email = User::select('email')->find($tujuan_orang);
+                // send mail
+                // Mail::to($email['email'])->send(new SendMailToPegawai($detail));
+            } else if ($request->jenis_tujuan == 'tujuan_bidang') {
+                // get email dari id bidang
+                // $email = User::select('email')->where('id_bidang', $tujuan_bidang)->get();
+                // foreach ($email as $key => $value) {
+                //     Mail::to($value->email)->send(new SendMailToPegawai($detail));
+                // }
+            }
+
+            return redirect('agenda')->with('success', 'Agenda berhasil ditambah dan Berhasil terkirim ke Email Pegawai');
         } else {
             return redirect()->back()->with('alert', 'Agenda gagal ditambah');
         }
@@ -108,9 +141,10 @@ class AgendaController extends Controller
         if ($request->file_already != null) {
             $validator = $request->validate([
                 'file_upload' => 'required',
+                'tujuan' => 'required',
             ]);
-            
-            unlink(storage_path('app/public/'.$request->file_already));
+
+            unlink(storage_path('app/public/' . $request->file_already));
         }
 
         if ($request->file_upload == null) {
@@ -138,6 +172,28 @@ class AgendaController extends Controller
 
             ]);
         if ($query) {
+            $detail = [
+                'title' => 'Agenda diubah',
+                'tanggal' => $date,
+                'jam' => $request->jam,
+                'jam2' => $request->jam2,
+                'tempat' => $request->tempat,
+                'keterangan' => $request->keterangan
+            ];
+            // send ke email
+            // jika tujuan per orangan
+            if ($request->jenis_tujuan == 'tujuan_orang') {
+                // get email tujuan pegawai
+                $email = User::select('email')->find($tujuan_orang);
+                // send mail
+                Mail::to($email['email'])->send(new SendMailToPegawai($detail));
+            } else if ($request->jenis_tujuan == 'tujuan_bidang') {
+                // get email dari id bidang
+                $email = User::select('email')->where('id_bidang', $tujuan_bidang)->get();
+                foreach ($email as $key => $value) {
+                    Mail::to($value->email)->send(new SendMailToPegawai($detail));
+                }
+            }
             return redirect('agenda')->with('success', 'Agenda berhasil ditambah');
         } else {
             return redirect()->back()->with('alert', 'Agenda gagal ditambah');
@@ -155,8 +211,8 @@ class AgendaController extends Controller
     {
         // hapus file yg ada
         $file_path = Agenda::find($id, ['file_upload']);
-        if($file_path['file_upload'] != null ){
-            unlink(storage_path('app/public/'.$file_path['file_upload']));
+        if ($file_path['file_upload'] != null) {
+            unlink(storage_path('app/public/' . $file_path['file_upload']));
         }
 
         Agenda::where('id', $id)->delete();

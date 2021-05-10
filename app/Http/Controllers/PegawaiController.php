@@ -45,7 +45,6 @@ class PegawaiController extends Controller
                 'password' => bcrypt($request->password),
                 'nomor_hp' => $request->nomor_hp,
                 'jenis_kelamin' => $request->jenis_kelamin,
-                'golongan' => $request->golongan,
                 'jabatan' => $request->jabatan,
                 'id_bidang' => $request->bidang
 
@@ -69,7 +68,6 @@ class PegawaiController extends Controller
             'name' => $request->nama,
             'nomor_hp' => $request->nomor_hp,
             'jenis_kelamin' => $request->jenis_kelamin,
-            'golongan' => $request->golongan,
             'jabatan' => $request->jabatan,
             'id_bidang' => $request->bidang
         ]);

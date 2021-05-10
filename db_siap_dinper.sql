@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Apr 2021 pada 11.37
+-- Waktu pembuatan: 14 Apr 2021 pada 06.07
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.3.15
 
@@ -44,14 +44,6 @@ CREATE TABLE `agenda_harians` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `agenda_harians`
---
-
-INSERT INTO `agenda_harians` (`id`, `nomor_surat`, `tanggal`, `jam`, `jam2`, `tempat`, `jenis_agenda`, `tujuan_jenis`, `tujuan_bidang`, `tujuan_orang`, `keterangan`, `file_upload`, `created_at`, `updated_at`) VALUES
-(32, 'adsdsd', '2021-04-10', '16:30', 'Selesai', 'adsd', 'adas', 'tujuan_bidang', 15, NULL, 'ada', 'uploads/1618046253_Permohonan Keringanan UKT2.pdf', NULL, NULL),
-(33, 'aaaaa', '2021-04-09', '20:45', 'Selesai', 'as', 'adsadas', 'tujuan_bidang', 15, NULL, 'adsd', '', NULL, '2021-04-10 01:42:44');
 
 -- --------------------------------------------------------
 
@@ -146,8 +138,7 @@ CREATE TABLE `model_has_roles` (
 --
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
-(1, 'App\\Models\\User', 1),
-(2, 'App\\Models\\User', 9);
+(1, 'App\\Models\\User', 1);
 
 -- --------------------------------------------------------
 
@@ -223,7 +214,6 @@ CREATE TABLE `users` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nomor_hp` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `jenis_kelamin` enum('P','L') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `golongan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `jabatan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_bidang` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -235,9 +225,8 @@ CREATE TABLE `users` (
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `nip`, `name`, `email`, `email_verified_at`, `password`, `nomor_hp`, `jenis_kelamin`, `golongan`, `jabatan`, `id_bidang`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Admin', 'admin@gmail.com', NULL, '$2y$10$pb4Q40RWaKdM9g8886nJ5ucvSB2r7RCy2J3Rai.rjPFAcZhitTz3C', '082385786666', NULL, NULL, NULL, NULL, NULL, '2021-04-07 07:41:59', '2021-04-07 07:41:59'),
-(9, '1232132312', 'elfa', 'elfa@gmail.com', NULL, '$2y$10$BuRlivFIOFI2RL/vK5UTiugcWY/2czUbVmUHBNGVOpYspNSSmUD4O', '0823122324', 'P', 'VI', 'Kepala', '16', NULL, '2021-04-09 23:58:53', '2021-04-09 23:58:53');
+INSERT INTO `users` (`id`, `nip`, `name`, `email`, `email_verified_at`, `password`, `nomor_hp`, `jenis_kelamin`, `jabatan`, `id_bidang`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'Admin', 'admin@gmail.com', NULL, '$2y$10$pb4Q40RWaKdM9g8886nJ5ucvSB2r7RCy2J3Rai.rjPFAcZhitTz3C', '082385786666', NULL, NULL, NULL, NULL, '2021-04-07 07:41:59', '2021-04-07 07:41:59');
 
 --
 -- Indexes for dumped tables
@@ -324,7 +313,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `agenda_harians`
 --
 ALTER TABLE `agenda_harians`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT untuk tabel `bidangs`
@@ -360,7 +349,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

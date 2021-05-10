@@ -1,9 +1,9 @@
 @include('layouts.header')
 <!-- Begin page -->
 
-    @include('layouts.topbar')
+@include('layouts.topbar')
 
-    @include('layouts.sidebar')
+@include('layouts.sidebar')
 
 
 

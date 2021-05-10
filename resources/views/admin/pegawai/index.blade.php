@@ -33,7 +33,6 @@
             <th>Nama</th>
             <th>Email</th>
             <th>Jenis Kelamin</th>
-            <th>Golongan</th>
             <th>Jabatan</th>
             <th>Didaftarkan</th>
             <th>Action</th>
@@ -56,7 +55,6 @@
               Perempuan
               @endif
             </td>
-            <td>{{$value->golongan}}</td>
             <td>{{$value->jabatan}}</td>
             <td>{{$value->created_at}}</td>
             <td>
@@ -124,11 +122,6 @@
 
 
 
-        <div class="form-group">
-          <div class="col-xs-12">
-            <input class="form-control" type="text" autocomplete="off" name="golongan" required="" placeholder="Golongan">
-          </div>
-        </div>
 
         <div class="form-group">
           <div class="col-xs-12">
@@ -221,14 +214,6 @@
         </div>
 
 
-
-        <div class="form-group row">
-          <label class="col-2 col-form-label">Golongan</label>
-          <div class="col-md-10">
-            <input class="form-control" type="text" autocomplete="off" id="edit_golongan" name="golongan" required="" placeholder="Golongan">
-          </div>
-        </div>
-
         <div class="form-group row">
           <label class="col-2 col-form-label">Jabatan</label>
           <div class="col-md-10">
@@ -280,7 +265,6 @@
         $('#edit_nama').val(data['name'])
         $('#edit_jk').val(data['jenis_kelamin'])
         $('#edit_bidang').val(data['id_bidang'])
-        $('#edit_golongan').val(data['golongan'])
         $('#edit_jabatan').val(data['jabatan'])
         $('#edit_nomor_hp').val(data['nomor_hp'])
         $('#edit_email').val(data['email'])

@@ -4,9 +4,8 @@
 <div class="clearfix"></div>
 <div class="wrapper-page">
     <div class="text-center">
-        <a href="index.html" class="logo"><span>SI<span>AP</span></span></a>
-        <h5 class="text-muted m-t-0 font-600">Sistem Informasi Agenda Pegawai Dinas Perhubungan <br>
-            Kabupaten Kampar </h5>
+        <a href="index.html" class="logo"><span>Sistem <span>Informasi</span></span></a>
+        <h5 class="text-muted m-t-0 font-600"> Agenda Pegawai Dinas Perhubungan Kabupaten Kampar </h5>
     </div>
     <div class="m-t-40 card-box">
         <div class="text-center">

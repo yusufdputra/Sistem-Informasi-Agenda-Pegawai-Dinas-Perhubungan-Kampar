@@ -3,7 +3,9 @@
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\BidangController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\PegawaiController;
+use App\Mail\SendMailToPegawai;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +47,8 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/bidang', [BidangController::class, 'index'])->name('bidang.index');
     Route::post('/bidang/store', [BidangController::class, 'store'])->name('bidang.store');
     Route::post('/bidang/update', [BidangController::class, 'update'])->name('bidang.update');
+
+    
 
 
 });

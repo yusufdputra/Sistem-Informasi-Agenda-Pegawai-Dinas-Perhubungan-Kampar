@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('nomor_hp')->nullable();
             $table->enum('jenis_kelamin', ['P','L'])->nullable();
-            $table->string('golongan')->nullable();
             $table->string('jabatan')->nullable();
             $table->string('id_bidang');
             $table->rememberToken();
