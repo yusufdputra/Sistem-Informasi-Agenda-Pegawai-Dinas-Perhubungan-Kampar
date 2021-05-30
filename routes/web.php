@@ -34,6 +34,8 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::POST('/pegawai/tambah', [PegawaiController::class, 'tambah'])->name('pegawai.tambah');
     Route::get('/pegawai/edit/{id}', [PegawaiController::class, 'edit'])->name('pegawai/edit');
     Route::POST('/pegawai/edit', [PegawaiController::class, 'update'])->name('pegawai.update');
+    Route::post('/pegawai/hapus', [PegawaiController::class, 'hapus'])->name('pegawai.hapus');
+    Route::post('/pegawai/resetpw', [PegawaiController::class, 'resetpw'])->name('pegawai.resetpw');
 
     // kelola agenda
     Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda.index');
@@ -47,6 +49,7 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/bidang', [BidangController::class, 'index'])->name('bidang.index');
     Route::post('/bidang/store', [BidangController::class, 'store'])->name('bidang.store');
     Route::post('/bidang/update', [BidangController::class, 'update'])->name('bidang.update');
+    Route::post('/bidang/hapus', [BidangController::class, 'hapus'])->name('bidang.hapus');
 
     
 

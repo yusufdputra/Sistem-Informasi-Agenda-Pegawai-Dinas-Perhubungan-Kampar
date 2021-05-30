@@ -23,9 +23,10 @@ class CreateUsersTable extends Migration
             $table->string('nomor_hp')->nullable();
             $table->enum('jenis_kelamin', ['P','L'])->nullable();
             $table->string('jabatan')->nullable();
-            $table->string('id_bidang');
+            $table->bigInteger('id_bidang')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

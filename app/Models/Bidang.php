@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Bidang extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     protected $fillable = [
         'id', 
         'name',
@@ -16,12 +16,14 @@ class Bidang extends Model
         'updated_at'
     ];
 
+    protected $dates = ['deleted_at'];
+
     public function user()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class);
     }
     public function agenda()
     {
-        return $this->hasOne(Agenda::class, 'id', 'tujuang_bidang');
+        return $this->belongsToMany(Agenda::class);
     }
 }

@@ -44,4 +44,15 @@ class BidangController extends Controller
             return redirect()->back()->with('alert', 'Bidang gagal diubah');
         }
     }
+
+    public function hapus(Request $request)
+    {
+        $query = Bidang::where('id', $request->id)->delete();
+
+        if ($query) {
+            return redirect()->back()->with('success', 'Berhasil menghapus Bidang');
+        } else {
+            return redirect()->back()->with('alert', 'Gagal menghapus Bidang');
+        }
+    }
 }

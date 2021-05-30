@@ -7,7 +7,7 @@
       @role('admin')
       <div class="align-items-center">
 
-        <a href="#tambah-modal" data-animation="sign" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a" class="btn btn-primary m-l-10 waves-light  mb-5">Tambah</a>
+        <a href="#tambah-modal" data-animation="sign" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a" class="btn btn-primary m-l-10 waves-light mb-3">Tambah</a>
 
       </div>
 
@@ -41,6 +41,8 @@
             <td>{{$value['name']}}</td>
             <td>
               <a href="#edit-modal" data-animation="sign" data-plugin="custommodal" data-id='{{$value->id}}' data-nama="{{$value['name']}}" data-overlaySpeed="100" data-overlayColor="#36404a" class="btn btn-rounded btn-success btn-sm modal_edit"><i class="fa fa-edit"></i></a>
+
+              <a href="#hapus-modal" data-animation="sign" data-plugin="custommodal" data-id='{{$value->id}}' data-overlaySpeed="100" data-overlayColor="#36404a" class="btn btn-rounded btn-danger btn-sm hapus"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
           @endforeach
@@ -93,7 +95,7 @@
   <div class="custom-modal-text">
 
     <div class="text-center">
-      <h4 class="text-uppercase font-bold mb-0">Edit Pegawai</h4>
+      <h4 class="text-uppercase font-bold mb-0">Edit Bidang</h4>
     </div>
     <div class="p-20">
 
@@ -120,6 +122,39 @@
 
 </div>
 
+<div id="hapus-modal" class="modal-demo">
+  <button type="button" class="close" onclick="Custombox.close();">
+    <span>&times;</span><span class="sr-only">Close</span>
+  </button>
+
+  <div class="custom-modal-text">
+
+    <div class="text-center">
+      <h4 class="text-uppercase font-bold mb-0">Hapus Bidang</h4>
+    </div>
+    <div class="p-20">
+
+      <form class="form-horizontal m-t-20" enctype="multipart/form-data" action="{{route('bidang.hapus')}}" method="POST">
+        {{csrf_field()}}
+        <div>
+          <input type="hidden" id='id_hapus' name='id'>
+          <h5 id="exampleModalLabel">Apakah anda yakin ingin mengapus Bidang ini?</h5>
+        </div>
+
+        <div class="form-group text-center m-t-30">
+          <div class="col-xs-6">
+            <button class="btn btn-danger btn-bordred btn-block waves-effect waves-light" type="submit">Hapus</button>
+          </div>
+        </div>
+
+
+      </form>
+
+    </div>
+  </div>
+
+</div>
+
 <script type="text/javascript">
   $('.modal_edit').click(function() {
     var id = $(this).data('id');
@@ -127,6 +162,11 @@
     $('#edit_id').val(id)
     $('#edit_nama').val(nama)
 
+  });
+
+  $('.hapus').click(function() {
+    var id = $(this).data('id');
+    $('#id_hapus').val(id);
   });
 </script>
 @endsection
