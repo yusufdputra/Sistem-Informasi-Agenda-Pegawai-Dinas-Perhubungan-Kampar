@@ -48,9 +48,11 @@ class AgendaController extends Controller
     public function store(Request $request)
     {
         // cek
-        $request->validate([
-            'tujuan' => 'required',
-        ]);
+        if ($request->jenis_tujuan != 'tujuan_semua') {
+            $request->validate([
+                'tujuan' => 'required',
+            ]);
+        }
 
         // date format
         $date = $request->tanggal;
@@ -119,6 +121,16 @@ class AgendaController extends Controller
                         return redirect('agenda')->with('alert', 'Agenda Berhasil di Tambah, Namun gagal dikirim ke email tujuan');
                     }
                 }
+            } else if ($request->jenis_tujuan == 'tujuan_semua') {
+                // get email semua
+                $email = User::select('email')->get();
+                foreach ($email as $key => $value) {
+                    try {
+                        Mail::to($value->email)->send(new SendMailToPegawai($detail));
+                    } catch (\Throwable $th) {
+                        return redirect('agenda')->with('alert', 'Agenda Berhasil di Tambah, Namun gagal dikirim ke email semua pegawai');
+                    }
+                }
             }
 
             return redirect('agenda')->with('success', 'Agenda berhasil ditambah dan Berhasil terkirim ke Email Pegawai');
@@ -129,9 +141,13 @@ class AgendaController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
-            'tujuan' => 'required',
-        ]);
+        // cek
+        if ($request->jenis_tujuan != 'tujuan_semua') {
+            $request->validate([
+                'tujuan' => 'required',
+            ]);
+        }
+
         // date format
         $date = $request->tanggal;
         $date = Carbon::parse($date)->format('Y-m-d');
@@ -147,18 +163,19 @@ class AgendaController extends Controller
         // get nama file
 
         // jika file sebelumnya ada dan tidak ada upload file baru
-        if ($request->file_already != null & $request->file_upload == null) {
+        if ($request->file_already != null && $request->file_upload == null) {
             $file_path =  $request->file_already;
         }
         // jika file sebelumnya tidak ada dan tidak ada upload file baru  
-        else if ($request->file_already == null & $request->file_upload == null) {
+        else if ($request->file_already == null && $request->file_upload == null) {
             $file_path = null;
         }
         // jika file sebelumnya ada dan ada upload baru
-        else if ($request->file_already != null & $request->file_upload != null) {
-            // hapus file yg lama
-            unlink(storage_path('app/public/' . $request->file_already));
-
+        else if ($request->file_upload != null) {
+            if ($request->file_already != null) {
+                // hapus file yg lama
+                unlink(storage_path('app/public/' . $request->file_already));
+            }
             // upload file baru
             $file = $request->file('file_upload');
             $file_name = time() . '_' . $file->getClientOriginalName();
@@ -209,6 +226,16 @@ class AgendaController extends Controller
                         Mail::to($value->email)->send(new SendMailToPegawai($detail));
                     } catch (\Throwable $th) {
                         return redirect('agenda')->with('alert', 'Agenda Berhasil diubah, Namun gagal dikirim ke email tujuan');
+                    }
+                }
+            } else if ($request->jenis_tujuan == 'tujuan_semua') {
+                // get email semua
+                $email = User::select('email')->get();
+                foreach ($email as $key => $value) {
+                    try {
+                        Mail::to($value->email)->send(new SendMailToPegawai($detail));
+                    } catch (\Throwable $th) {
+                        return redirect('agenda')->with('alert', 'Agenda Berhasil di Tambah, Namun gagal dikirim ke email semua pegawai');
                     }
                 }
             }

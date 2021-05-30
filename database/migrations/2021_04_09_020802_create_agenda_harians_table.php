@@ -21,7 +21,7 @@ class CreateAgendaHariansTable extends Migration
             $table->string('jam2');
             $table->string('tempat');
             $table->string('jenis_agenda');
-            $table->enum('tujuan_jenis', ['tujuan_bidang', 'tujuan_orang']);
+            $table->enum('tujuan_jenis', ['tujuan_bidang', 'tujuan_orang', 'tujuan_semua']);
             $table->bigInteger('tujuan_bidang')->nullable();
             $table->bigInteger('tujuan_orang')->nullable();
             $table->string('keterangan');

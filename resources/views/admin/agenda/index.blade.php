@@ -77,6 +77,8 @@
             <td>Bpk/Ibu {{$value->users[0]['name']}}</td>
             @elseif ($value->tujuan_jenis == 'tujuan_bidang')
             <td>Bidang {{$value->bidang[0]['name']}}</td>
+            @elseif ($value->tujuan_jenis == 'tujuan_semua')
+            <td>Seluruh Pegawai</td>
             @endif
             <td>{{$value->keterangan}}</td>
             <td>

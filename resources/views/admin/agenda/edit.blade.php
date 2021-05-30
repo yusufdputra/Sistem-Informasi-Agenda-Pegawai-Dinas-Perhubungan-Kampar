@@ -100,9 +100,13 @@
                 <input type="radio" id="customRadio2" value="tujuan_bidang" name="jenis_tujuan" class="custom-control-input">
                 <label class="custom-control-label" for="customRadio2">Per Bidang</label>
               </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio3" value="tujuan_semua" name="jenis_tujuan" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio3">Semua Pegawai</label>
+              </div>
             </div>
 
-            <div class="col-sm-5">
+            <div class="col-sm-5" id="form_select_tujuan">
               <!-- nama orang -->
               <select class="custom-select select2" id="select_tujuan" name="tujuan">
               </select>
@@ -112,7 +116,7 @@
               </div>
               @enderror
             </div>
-            
+
           </div>
 
           <div class="form-group row">
@@ -120,7 +124,7 @@
             <div class="col-sm-8">
               <p class="text-muted">Format (PDF ) <br> File Sebelumnya : {{$agenda['file_upload']}}</p>
               <input type="hidden" name="file_already" value="{{$agenda['file_upload']}}">
-              <input type="file" data-height="100"  class="dropify" name="file_upload" accept=".pdf" data-max-file-size="5M" />
+              <input type="file" data-height="100" class="dropify" name="file_upload" accept=".pdf" data-max-file-size="5M" />
               @error('file_upload')
               <div class="text-danger mt-2">
                 {{ $message }}
@@ -151,42 +155,21 @@
     var agenda_data = JSON.parse(document.getElementById('agenda_data').value)
     var tujuan_jenis = (agenda_data['tujuan_jenis']);
     $('#select_tujuan').html('')
-    if (tujuan_jenis == 'tujuan_orang') {
-      $("#customRadio1").prop("checked", true);
-      data_tujuan = null
-      data_tujuan = document.getElementById('data_pegawai').value
-      var tujuan = (agenda_data['tujuan_orang'])
+    if (tujuan_jenis == 'tujuan_semua') {
+      document.getElementById('form_select_tujuan').hidden = true;
+      $("#customRadio3").prop("checked", true);
     } else {
-      $("#customRadio2").prop("checked", true);
-      data_tujuan = null
-      data_tujuan = document.getElementById('data_bidang').value
-      var tujuan = (agenda_data['tujuan_bidang'])
-    }
-    data_tujuan = JSON.parse(data_tujuan)
-    for (let i = 0; i < data_tujuan.length; i++) {
-      if (data_tujuan[i]['name'] != 'Admin') {
-          const id = data_tujuan[i]['id']
-          const name = data_tujuan[i]['name']
-          var o = new Option(name, id);
-          $(o).html(name)
-          $('#select_tujuan').append(o)
-        }
-      }
-      $('#select_tujuan').val(tujuan)
-      
-
-
-
-    $('input[type=radio][name=jenis_tujuan]').change(function() {
-      var data_tujuan = []
-      $('#select_tujuan').html('')
-      if (this.value == 'tujuan_orang') {
+      document.getElementById('form_select_tujuan').hidden = false;
+      if (tujuan_jenis == 'tujuan_orang') {
+        $("#customRadio1").prop("checked", true);
         data_tujuan = null
         data_tujuan = document.getElementById('data_pegawai').value
-
-      } else if (this.value == 'tujuan_bidang') {
+        var tujuan = (agenda_data['tujuan_orang'])
+      } else if (tujuan_jenis == 'tujuan_bidang') {
+        $("#customRadio2").prop("checked", true);
         data_tujuan = null
         data_tujuan = document.getElementById('data_bidang').value
+        var tujuan = (agenda_data['tujuan_bidang'])
       }
       data_tujuan = JSON.parse(data_tujuan)
       for (let i = 0; i < data_tujuan.length; i++) {
@@ -196,6 +179,37 @@
           var o = new Option(name, id);
           $(o).html(name)
           $('#select_tujuan').append(o)
+        }
+      }
+      $('#select_tujuan').val(tujuan)
+    }
+
+
+
+    $('input[type=radio][name=jenis_tujuan]').change(function() {
+      var data_tujuan = []
+      $('#select_tujuan').html('')
+      if (this.value == 'tujuan_semua') {
+        document.getElementById('form_select_tujuan').hidden = true;
+      } else {
+        document.getElementById('form_select_tujuan').hidden = false;
+        if (this.value == 'tujuan_orang') {
+          data_tujuan = null
+          data_tujuan = document.getElementById('data_pegawai').value
+
+        } else if (this.value == 'tujuan_bidang') {
+          data_tujuan = null
+          data_tujuan = document.getElementById('data_bidang').value
+        }
+        data_tujuan = JSON.parse(data_tujuan)
+        for (let i = 0; i < data_tujuan.length; i++) {
+          if (data_tujuan[i]['name'] != 'Admin') {
+            const id = data_tujuan[i]['id']
+            const name = data_tujuan[i]['name']
+            var o = new Option(name, id);
+            $(o).html(name)
+            $('#select_tujuan').append(o)
+          }
         }
       }
 
