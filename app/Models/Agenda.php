@@ -22,7 +22,6 @@ class Agenda extends Model
         'tujuan_orang',
         'keterangan',
         'file_upload',
-        'status',
         'deleted_at'
     ];
 

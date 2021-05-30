@@ -129,6 +129,9 @@ class AgendaController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'tujuan' => 'required',
+        ]);
         // date format
         $date = $request->tanggal;
         $date = Carbon::parse($date)->format('Y-m-d');

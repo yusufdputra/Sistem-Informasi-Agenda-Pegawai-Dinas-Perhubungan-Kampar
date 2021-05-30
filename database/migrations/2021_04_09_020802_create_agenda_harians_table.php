@@ -26,7 +26,6 @@ class CreateAgendaHariansTable extends Migration
             $table->bigInteger('tujuan_orang')->nullable();
             $table->string('keterangan');
             $table->string('file_upload')->nullable();
-            $table->string('status')->nullable();
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
         });

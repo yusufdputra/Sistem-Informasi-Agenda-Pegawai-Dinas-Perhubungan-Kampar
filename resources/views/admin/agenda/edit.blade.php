@@ -106,7 +106,13 @@
               <!-- nama orang -->
               <select class="custom-select select2" id="select_tujuan" name="tujuan">
               </select>
+              @error('tujuan')
+              <div class="text-danger mt-2">
+                {{ $message }}
+              </div>
+              @enderror
             </div>
+            
           </div>
 
           <div class="form-group row">
@@ -129,9 +135,7 @@
               <button type="submit" class="btn btn-primary waves-effect waves-light">
                 Submit
               </button>
-              <button onclick="history.back()" type="reset" class="btn btn-secondary waves-effect m-l-5">
-                Cancel
-              </button>
+              <a href="{{route('agenda.index')}}" class="btn btn-danger  waves-effect waves-light ">Kembali</a>
             </div>
           </div>
         </div>

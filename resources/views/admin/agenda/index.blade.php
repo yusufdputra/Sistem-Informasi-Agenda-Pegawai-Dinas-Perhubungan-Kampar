@@ -9,10 +9,11 @@
       <a href="{{route('agenda.tambah')}}" class="btn btn-primary m-l-10 waves-light  mb-2">Tambah</a>
       @else
 
-      
+
 
       <div class="form-group row m-l-5">
         <button onclick="agenda_today()" class="btn btn-success waves-effect m-l-5 waves-light m-b-30">Lihat Hari Ini</button>
+        <button onclick="agenda_semua()" class="btn btn-warning waves-effect m-l-5 waves-light m-b-30">Lihat Semua</button>
         <label class="pull-right m-l-10 col-form-label">Atau Cari Agenda</label>
         <div class="col-sm-3">
           <div class="input-group">
@@ -93,14 +94,16 @@
               @endif
             </td>
             @role('admin')
-            <td>
-              <div class="row">
-                <a href="{{route('agenda.edit',$value->id)}}" class="btn btn-rounded btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                <a href="#hapus-modal" data-animation="sign" data-plugin="custommodal" data-id='{{$value->id}}' data-overlaySpeed="100" data-overlayColor="#36404a" class="btn btn-rounded btn-danger btn-sm hapus"><i class="fa fa-trash"></i></a>
-             
-              </div>
-            </td>
-            @endrole
+            @if($date < $now ) <td>-</td>
+              @else
+              <td>
+                <div class="row">
+                  <a href="{{route('agenda.edit',$value->id)}}" class="btn btn-rounded btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                  <a href="#hapus-modal" data-animation="sign" data-plugin="custommodal" data-id='{{$value->id}}' data-overlaySpeed="100" data-overlayColor="#36404a" class="btn btn-rounded btn-danger btn-sm hapus"><i class="fa fa-trash"></i></a>
+                </div>
+              </td>
+              @endif
+              @endrole
           </tr>
           @endforeach
         </tbody>
@@ -165,14 +168,22 @@
       ).draw()
     }
     filterData()
+  }
 
+  function agenda_semua() {
+ 
+    $('#datatable-buttons').DataTable()
 
+    function filterData() {
+      $('#datatable-buttons').DataTable().search(
+        ''
+      ).draw()
+    }
+    filterData()
   }
 
   function agenda_day() {
     const date_format = document.getElementById('datepicker-autoclose').value
-
-
     $('#datatable-buttons').DataTable()
 
     function filterData() {
@@ -181,7 +192,6 @@
       ).draw()
     }
     filterData()
-
   }
 </script>
 
