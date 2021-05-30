@@ -38,7 +38,6 @@
   <!-- select2 -->
   
   <link href="{{asset('adminto/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
-  @toastr_css
 
 </head>
 
