@@ -5,7 +5,7 @@
 <div class="wrapper-page">
     <div class="text-center">
         <a href="index.html" class="logo"><span>Sistem <span>Informasi</span></span></a>
-        <h5 class="text-muted m-t-0 font-600"> Agenda Pegawai Dinas Perhubungan Kabupaten Kampar </h5>
+        <h5 class="text-muted m-t-0 font-600"> Agenda Harian Dinas Perhubungan Kabupaten Kampar </h5>
     </div>
     <div class="m-t-40 card-box">
         <div class="text-center">

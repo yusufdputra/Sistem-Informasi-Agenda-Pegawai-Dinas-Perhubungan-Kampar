@@ -88,6 +88,7 @@
 
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Tujuan</label>
+            <input type="hidden" id="agenda_data" value="{{$agenda}}">
             <div class="col-sm-3">
               <div class="custom-control custom-radio">
                 <input type="hidden" id="data_pegawai" value="{{$pegawai}}">
@@ -111,9 +112,9 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">File Surat</label>
             <div class="col-sm-8">
-              <p class="text-muted">Format (PDF )</p>
+              <p class="text-muted">Format (PDF ) <br> File Sebelumnya : {{$agenda['file_upload']}}</p>
               <input type="hidden" name="file_already" value="{{$agenda['file_upload']}}">
-              <input type="file" data-height="100" class="dropify" name="file_upload" accept=".pdf" data-max-file-size="5M" />
+              <input type="file" data-height="100"  class="dropify" name="file_upload" accept=".pdf" data-max-file-size="5M" />
               @error('file_upload')
               <div class="text-danger mt-2">
                 {{ $message }}
@@ -143,6 +144,34 @@
 <script type="text/javascript">
   $(document).ready(function() {
 
+    var agenda_data = JSON.parse(document.getElementById('agenda_data').value)
+    var tujuan_jenis = (agenda_data['tujuan_jenis']);
+    $('#select_tujuan').html('')
+    if (tujuan_jenis == 'tujuan_orang') {
+      $("#customRadio1").prop("checked", true);
+      data_tujuan = null
+      data_tujuan = document.getElementById('data_pegawai').value
+      var tujuan = (agenda_data['tujuan_orang'])
+    } else {
+      $("#customRadio2").prop("checked", true);
+      data_tujuan = null
+      data_tujuan = document.getElementById('data_bidang').value
+      var tujuan = (agenda_data['tujuan_bidang'])
+    }
+    data_tujuan = JSON.parse(data_tujuan)
+    for (let i = 0; i < data_tujuan.length; i++) {
+      if (data_tujuan[i]['name'] != 'Admin') {
+          const id = data_tujuan[i]['id']
+          const name = data_tujuan[i]['name']
+          var o = new Option(name, id);
+          $(o).html(name)
+          $('#select_tujuan').append(o)
+        }
+      }
+      $('#select_tujuan').val(tujuan)
+      
+
+
 
     $('input[type=radio][name=jenis_tujuan]').change(function() {
       var data_tujuan = []
@@ -157,12 +186,13 @@
       }
       data_tujuan = JSON.parse(data_tujuan)
       for (let i = 0; i < data_tujuan.length; i++) {
-        const id = data_tujuan[i]['id']
-        const name = data_tujuan[i]['name']
-        console.log(id);
-        var o = new Option(name, id);
-        $(o).html(name)
-        $('#select_tujuan').append(o)
+        if (data_tujuan[i]['name'] != 'Admin') {
+          const id = data_tujuan[i]['id']
+          const name = data_tujuan[i]['name']
+          var o = new Option(name, id);
+          $(o).html(name)
+          $('#select_tujuan').append(o)
+        }
       }
 
     });

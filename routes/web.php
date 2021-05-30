@@ -43,7 +43,7 @@ Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/agenda/edit/{id}', [AgendaController::class, 'edit'])->name('agenda.edit');
     Route::post('/agenda/update', [AgendaController::class, 'update'])->name('agenda.update');
     Route::post('/agenda/store', [AgendaController::class, 'store'])->name('agenda.store');
-    Route::get('/agenda/hapus/{id}', [AgendaController::class, 'hapus'])->name('agenda.hapus');
+    Route::post('/agenda/hapus', [AgendaController::class, 'hapus'])->name('agenda.hapus');
     
     // kelola bidang
     Route::get('/bidang', [BidangController::class, 'index'])->name('bidang.index');

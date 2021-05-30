@@ -3,9 +3,10 @@
 @section('content')
 <div class="row">
   <div class="col-sm-12">
-    <div class="card-box">
+    <div class="card-box p-20">
 
-      <h5 class="m-b-30"><b>Tambah Agenda Harian</b></h5>
+      <a href="{{route('agenda.index')}}" class="btn btn-danger waves-light mb-3">Kembali</a>
+
       @if(\Session::has('alert'))
       <div class="alert alert-danger">
         <div>{{Session::get('alert')}}</div>
@@ -112,7 +113,7 @@
             <label class="col-sm-3 col-form-label">File Surat</label>
             <div class="col-sm-8">
               <p class="text-muted">Format (PDF )</p>
-              <input type="file" data-height="100" class="dropify"  name="file_upload" accept=".pdf" data-max-file-size="5M" />
+              <input type="file" data-height="100" class="dropify" name="file_upload" accept=".pdf" data-max-file-size="5M" />
             </div>
           </div>
 
@@ -136,7 +137,7 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-   
+
     $('input[type=radio][name=jenis_tujuan]').change(function() {
       var data_tujuan = []
       $('#select_tujuan').html('')
@@ -150,12 +151,14 @@
       }
       data_tujuan = JSON.parse(data_tujuan)
       for (let i = 0; i < data_tujuan.length; i++) {
-        const id = data_tujuan[i]['id']
-        const name = data_tujuan[i]['name']
-        console.log(id);
-        var o = new Option(name, id);
-        $(o).html(name)
-        $('#select_tujuan').append(o)
+        if (data_tujuan[i]['name'] != 'Admin') {
+          const id = data_tujuan[i]['id']
+          const name = data_tujuan[i]['name']
+          var o = new Option(name, id);
+          $(o).html(name)
+          $('#select_tujuan').append(o)
+        }
+
       }
 
     });

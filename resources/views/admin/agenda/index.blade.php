@@ -6,8 +6,10 @@
     <div class="card-box table-responsive">
       @role('admin')
 
-      <a href="{{route('agenda.tambah')}}" class="btn btn-primary m-l-10 waves-light  mb-5">Tambah</a>
+      <a href="{{route('agenda.tambah')}}" class="btn btn-primary m-l-10 waves-light  mb-2">Tambah</a>
       @else
+
+      
 
       <div class="form-group row m-l-5">
         <button onclick="agenda_today()" class="btn btn-success waves-effect m-l-5 waves-light m-b-30">Lihat Hari Ini</button>
@@ -26,6 +28,18 @@
       </div>
 
       @endrole
+
+      @if(\Session::has('alert'))
+      <div class="alert alert-danger">
+        <div>{{Session::get('alert')}}</div>
+      </div>
+      @endif
+
+      @if(\Session::has('success'))
+      <div class="alert alert-success">
+        <div>{{Session::get('success')}}</div>
+      </div>
+      @endif
 
 
       <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -59,23 +73,18 @@
             <td>{{$value->tempat}}</td>
             <td>{{$value->jenis_agenda}}</td>
             @if($value->tujuan_jenis == 'tujuan_orang')
-            <td>Bpk/Ibu {{$value->users->name}}</td>
+            <td>Bpk/Ibu {{$value->users[0]['name']}}</td>
             @elseif ($value->tujuan_jenis == 'tujuan_bidang')
-            <td>Bidang {{$value->bidang->name}}</td>
+            <td>Bidang {{$value->bidang[0]['name']}}</td>
             @endif
             <td>{{$value->keterangan}}</td>
             <td>
               <?php
-                $date = new DateTime(($value->tanggal));
-                $now = new DateTime();
-                $now->modify('-1 day');
+              $date = new DateTime(($value->tanggal));
+              $now = new DateTime();
+              $now->modify('-1 day');
               ?>
-              @if($date < $now )
-                Selesai
-              @else
-                -
-              @endif
-            </td>
+              @if($date < $now ) Selesai @else - @endif </td>
             <td>
               @if ($value->file_upload != null)
               <a href="\storage\{{$value->file_upload}}" target="_BLANK" class="btn btn-rounded btn-info btn-sm"><i class="fa fa-file-pdf-o"></i></a>
@@ -87,10 +96,11 @@
             <td>
               <div class="row">
                 <a href="{{route('agenda.edit',$value->id)}}" class="btn btn-rounded btn-primary btn-sm"><i class="fa fa-edit"></i></a>
-                <a href="{{route('agenda.hapus',$value->id)}}" class="btn btn-rounded btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                <a href="#hapus-modal" data-animation="sign" data-plugin="custommodal" data-id='{{$value->id}}' data-overlaySpeed="100" data-overlayColor="#36404a" class="btn btn-rounded btn-danger btn-sm hapus"><i class="fa fa-trash"></i></a>
+             
               </div>
             </td>
-              @endrole
+            @endrole
           </tr>
           @endforeach
         </tbody>
@@ -98,8 +108,47 @@
     </div>
   </div>
 </div>
+
+<div id="hapus-modal" class="modal-demo">
+  <button type="button" class="close" onclick="Custombox.close();">
+    <span>&times;</span><span class="sr-only">Close</span>
+  </button>
+
+  <div class="custom-modal-text">
+
+    <div class="text-center">
+      <h4 class="text-uppercase font-bold mb-0">Hapus Agenda</h4>
+    </div>
+    <div class="p-20">
+
+      <form class="form-horizontal m-t-20" enctype="multipart/form-data" action="{{route('agenda.hapus')}}" method="POST">
+        {{csrf_field()}}
+        <div>
+          <input type="hidden" id='id_hapus' name='id'>
+          <h5 id="exampleModalLabel">Apakah anda yakin ingin mengapus agenda ini?</h5>
+        </div>
+
+        <div class="form-group text-center m-t-30">
+          <div class="col-xs-6">
+            <button class="btn btn-danger btn-bordred btn-block waves-effect waves-light" type="submit">Hapus</button>
+          </div>
+        </div>
+
+
+      </form>
+
+    </div>
+  </div>
+
+</div>
 <!-- end row -->
 <script type="text/javascript">
+  $('.hapus').click(function() {
+    var id = $(this).data('id');
+    $('#id_hapus').val(id);
+  });
+
+
   function agenda_today() {
     const date_format = new Date()
     var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -117,12 +166,12 @@
     }
     filterData()
 
-    
+
   }
 
   function agenda_day() {
     const date_format = document.getElementById('datepicker-autoclose').value
-    
+
 
     $('#datatable-buttons').DataTable()
 
