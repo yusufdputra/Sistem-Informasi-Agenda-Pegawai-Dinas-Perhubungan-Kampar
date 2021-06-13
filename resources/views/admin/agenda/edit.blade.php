@@ -82,7 +82,13 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Jenis Agenda</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" value="{{$agenda['jenis_agenda']}}" required name="jenis_agenda" required placeholder="Jenis Agenda" />
+            <select class="custom-select" name="jenis_agenda">
+                <option value="Agenda Biasa" <?= $agenda['jenis_agenda'] == 'Agenda Biasa' ? 'selected' : ''; ?>>Agenda Biasa</option>
+                <option value="Agenda Rapat" <?= $agenda['jenis_agenda'] == 'Agenda Rapat' ? 'selected' : ''; ?>>Agenda Rapat</option>
+                <option value="Agenda Penting" <?= $agenda['jenis_agenda'] == 'Agenda Penting' ? 'selected' : ''; ?>>Agenda Penting</option>
+                <option value="Agenda Harian" <?= $agenda['jenis_agenda'] == 'Agenda Harian' ? 'selected' : ''; ?>>Agenda Harian</option>
+                <option value="Agenda Dinas Lapangan" <?= $agenda['jenis_agenda'] == 'Agenda Dinas Lapangan' ? 'selected' : ''; ?>>Agenda Dinas Lapangan</option>
+              </select>
             </div>
           </div>
 

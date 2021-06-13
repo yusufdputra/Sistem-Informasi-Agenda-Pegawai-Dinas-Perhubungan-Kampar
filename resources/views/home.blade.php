@@ -5,7 +5,7 @@
   <div class="col-12">
     <div class="card-box ">
 
-      <h2><strong>Satuan Polisi Pamong Praja Kota Pekanbaru</strong></h2>
+      <h2><strong>Dinas Perhubungan Kabupaten Kampar</strong></h2>
       <div class="col-lg-12 row">
       <div class="col-lg-4 col-xs-12 right">
         <img src="{{asset('adminto/images/big/bg2.jpg')}}" width="100%"  class="" alt="profile-image">

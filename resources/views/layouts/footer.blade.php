@@ -1,3 +1,32 @@
+<!-- Right Sidebar -->
+@role('pegawai')
+<div class="side-bar right-bar">
+    <a href="javascript:void(0);" class="right-bar-toggle">
+        <i class="mdi mdi-close-circle-outline"></i>
+    </a>
+    <h4 class="">Agenda Baru</h4>
+    <div class="notification-list nicescroll">
+        <ul class="list-group list-no-border user-list">
+            @foreach ($agenda_baru AS $key=>$value)
+            <li class="list-group-item">
+                <a href="{{route ('agenda.index')}}" class="user-list-item">
+                    <div class="icon bg-success">
+                        <i class="mdi mdi-view-agenda"></i>
+                    </div>
+                    <div class="user-desc">
+                        <span class="name">{{$value->jenis_agenda}}</span>
+                        <span class="desc">{{$value->keterangan}}</span>
+                        <span class="time">{{date("l, d-F-Y", strtotime($value->tanggal))}}</span>
+                    </div>
+                </a>
+            </li>
+            @endforeach
+
+        </ul>
+    </div>
+</div>
+@endrole
+<!-- /Right-bar -->
 <!-- jQuery  -->
 </div>
 
@@ -73,10 +102,10 @@
 <script type="text/javascript">
     $(document).ready(function() {
         jQuery('#datepicker-autoclose').datepicker({
-            
+
             format: "DD, dd-MM-yyyy",
             autoclose: true,
-            todayHighlight: true, 
+            todayHighlight: true,
         });
         // Default Datatable
         $('#datatable').DataTable();
@@ -84,7 +113,18 @@
         //Buttons examples
         var table = $('#datatable-buttons').DataTable({
             lengthChange: false,
-            buttons: ['copy', 'excel', 'pdf']
+            dom: 'Bfrtip',
+            buttons: [
+
+                {
+                    extend: 'excelHtml5',
+                    title: 'Laporan Agenda Harian Dinas Perhubungan Kampar'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    title: 'Laporan Agenda Harian Dinas Perhubungan Kampar'
+                }
+            ]
         });
 
         jQuery('.timepicker2').timepicker({

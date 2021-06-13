@@ -20,11 +20,19 @@ class AgendaController extends Controller
 
     public function index()
     {
+        $now = new DateTime();
+        $now->modify('-1 day');
+
         $title = "Kelola Agenda";
 
-        $agenda = Agenda::with('users')->get();
+        $agenda_baru = Agenda::with('users')
+            ->where('tanggal', '>', $now)
+            ->orderBy('updated_at', 'DESC')
+            ->get();
 
-        return view('admin.agenda.index', compact('title', 'agenda'));
+        $agenda = Agenda::with('users')->orderBy('updated_at', 'DESC')->get();
+
+        return view('admin.agenda.index', compact('title', 'agenda', 'agenda_baru'));
     }
 
     public function tambah()

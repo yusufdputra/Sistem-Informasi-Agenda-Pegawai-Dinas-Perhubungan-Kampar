@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agenda;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,7 +35,15 @@ class HomeController extends Controller
         $title = "Dashboard";
 
         if (Auth::check()) {
-            return view('home', compact('title'));
+            $now = new DateTime();
+            $now->modify('-1 day');
+
+            $agenda_baru = Agenda::with('users')
+                ->where('tanggal', '>', $now)
+                ->orderBy('updated_at', 'DESC')
+                ->get();
+
+            return view('home', compact('title', 'agenda_baru'));
         }
         return view('auth.login', compact('title'));
     }

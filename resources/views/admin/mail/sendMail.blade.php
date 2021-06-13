@@ -99,13 +99,13 @@
                 <table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                   <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                     <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                      Kamu ada <strong style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">1
+                      Kepada : Pegawai Dinas Yang Terhormat, Terdapat <strong style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">1
                         {{$detail['title']}}</strong>.
                     </td>
                   </tr>
                   <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                     <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                      Undangan pada: <br>
+                      Agenda pada: <br>
                       Tanggal : {{$detail['tanggal']}} <br>
                       Jam : {{$detail['jam']}} s/d {{$detail['jam2']}} <br>
                       Tempat : {{$detail['tempat']}} <br>
@@ -113,14 +113,14 @@
                      
                       <br>
                       <br>
-                      <strong>Silahkan Cek Website!</strong>
+                      <strong>Untuk informasi lebih lanjut silahkan login ke sistem agenda harian. Terimakasih.</strong>
 
                     </td>
                   </tr>
                   
                   <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                     <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                      Terimakasih,  <b>Dinas Perhubungan Kabupaten Kampar</b>.
+                      Bidang Pengembangan dan Keselamatan <br>  <b>Dinas Perhubungan Kabupaten Kampar</b>.
                     </td>
                   </tr>
                 </table>

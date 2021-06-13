@@ -82,7 +82,13 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label">Jenis Agenda</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" required name="jenis_agenda" required placeholder="Jenis Agenda" />
+              <select class="custom-select" name="jenis_agenda">
+                <option value="Agenda Biasa">Agenda Biasa</option>
+                <option value="Agenda Rapat">Agenda Rapat</option>
+                <option value="Agenda Penting">Agenda Penting</option>
+                <option value="Agenda Harian">Agenda Harian</option>
+                <option value="Agenda Dinas Lapangan">Agenda Dinas Lapangan</option>
+              </select>
             </div>
           </div>
 

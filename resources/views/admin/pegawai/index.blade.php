@@ -129,12 +129,16 @@
           </div>
         </div>
 
-
-
-
         <div class="form-group">
           <div class="col-xs-12">
-            <input class="form-control" type="text" autocomplete="off" name="jabatan" required="" placeholder="Jabatan">
+            <select class="custom-select" name="jabatan">
+              <option selected="" disabled>Jabatan</option>
+              <option value="Kepala Dinas">Kepala Dinas</option>
+              <option value="Sekretaris">Sekretaris</option>
+              <option value="Kepala Bidang">Kepala Bidang</option>
+              <option value="Kepala Seksi">Kepala Seksi</option>
+              <option value="Staff (Pegawai)">Staff (Pegawai)</option>
+            </select>
           </div>
         </div>
 
@@ -226,7 +230,14 @@
         <div class="form-group row">
           <label class="col-2 col-form-label">Jabatan</label>
           <div class="col-md-10">
-            <input class="form-control" type="text" autocomplete="off" id="edit_jabatan" name="jabatan" required="" placeholder="Jabatan">
+            <select class="custom-select" id="edit_jabatan" name="jabatan">
+              <option selected="" disabled>Jabatan</option>
+              <option value="Kepala Dinas">Kepala Dinas</option>
+              <option value="Sekretaris">Sekretaris</option>
+              <option value="Kepala Bidang">Kepala Bidang</option>
+              <option value="Kepala Seksi">Kepala Seksi</option>
+              <option value="Staff (Pegawai)">Staff (Pegawai)</option>
+            </select>
           </div>
         </div>
 

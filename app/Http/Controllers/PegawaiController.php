@@ -30,6 +30,7 @@ class PegawaiController extends Controller
 
     public function tambah(Request $request)
     {
+        
 
         // validasi apakah email sudah terdaftar atau belum
         $query = User::where('email',  $request->input('email'));
